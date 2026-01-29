@@ -9,7 +9,7 @@
 
   <h2 id="title">Will you be my Valentine?</h2>
 
-  <img src="download.jpeg" alt="photo" style="width:300px; max-width:85vw;"><br><br>
+  <img id="mainPic" src="download.jpeg" alt="photo" style="width:300px; max-width:85vw;"><br><br>
 
   <div id="buttons">
     <button id="yesBtn" onclick="sayYes()">Yes</button>
@@ -27,8 +27,14 @@
   function sayYes() {
     document.getElementById("title").innerText = "WOOT WOOT!";
     document.getElementById("buttons").style.display = "none";
-    document.getElementById("message").innerText = "You just made me very happy 😄.";
+    document.getElementById("message").innerText = "I love you!";
+
+    document.getElementById("mainPic").src = "images.jpeg";
+
     startParty();
+
+
+
   }
 
   function sayNo() {
@@ -45,17 +51,17 @@
     document.getElementById("message").innerText = messages[noCount % messages.length];
     noCount++;
 
-    // Grow Yes button
+   
     yesSize += 0.2;
     document.getElementById("yesBtn").style.transform = "scale(" + yesSize + ")";
 
-    // Shrink No button (but not invisible)
+    
     noSize -= 0.1;
     if (noSize < 0.3) noSize = 0.3;
     document.getElementById("noBtn").style.transform = "scale(" + noSize + ")";
   }
 
-  // ASCII celebration animation
+
   const frames = [
 `   *       *        *
       *         *
@@ -87,7 +93,7 @@ FIREWORKS:
     *    *    *
   *    *    *    *
 
-(yes was the correct answer)`;
+Thanks for saying yes.`;
       }
     }, 150);
   }

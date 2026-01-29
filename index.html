@@ -1,44 +1,96 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Valentine Question</title>
+  <meta charset="UTF-8">
+  <title>Valentine Question</title>
 </head>
-<body style="text-align:center; font-family: Arial; margin-top: 40px;">
 
-    <h2>Will you be my Valentine?</h2>
-    
-    <img src="download.jpeg" width="300"><br><br>
+<body style="text-align:center; font-family: Arial, sans-serif; margin-top:40px;">
 
-    <button onclick="sayYes()">Yes</button>
-    <button onclick="sayNo()">No</button>
+  <h2 id="title">Will you be my Valentine?</h2>
 
-    <p id="message"></p>
+  <img src="download.jpeg" alt="photo" style="width:300px; max-width:85vw;"><br><br>
+
+  <div id="buttons">
+    <button id="yesBtn" onclick="sayYes()">Yes</button>
+    <button id="noBtn" onclick="sayNo()">No</button>
+  </div>
+
+  <p id="message"></p>
+  <pre id="party" style="font-size:14px; line-height:1.15;"></pre>
 
 <script>
-    let noCount = 0;
+  let noCount = 0;
+  let yesSize = 1;
+  let noSize = 1;
 
-    function sayYes() {
-        document.body.innerHTML = `
-            <h1>WOOT WOOT!</h1>
-            <p>You just made me very happy :)</p>
-            <p>Happy Valentine's Day</p>
-        `;
-    }
+  function sayYes() {
+    document.getElementById("title").innerText = "WOOT WOOT!";
+    document.getElementById("buttons").style.display = "none";
+    document.getElementById("message").innerText = "You just made me very happy 😄.";
+    startParty();
+  }
 
-    function sayNo() {
-        const messages = [
-            "Are you sure?",
-            "Really sure?",
-            "Think again.",
-            "Last chance.",
-            "That doesn't seem right.",
-            "Try clicking yes instead.",
-            "I'm going to ask again."
-        ];
+  function sayNo() {
+    const messages = [
+      "Are you sure?",
+      "Really sure?",
+      "Think again.",
+      "That can't be right.",
+      "Try the other button.",
+      "I'm asking again.",
+      "You aren't getting away from this."
+    ];
 
-        document.getElementById("message").innerText = messages[noCount % messages.length];
-        noCount++;
-    }
+    document.getElementById("message").innerText = messages[noCount % messages.length];
+    noCount++;
+
+    // Grow Yes button
+    yesSize += 0.2;
+    document.getElementById("yesBtn").style.transform = "scale(" + yesSize + ")";
+
+    // Shrink No button (but not invisible)
+    noSize -= 0.1;
+    if (noSize < 0.3) noSize = 0.3;
+    document.getElementById("noBtn").style.transform = "scale(" + noSize + ")";
+  }
+
+  // ASCII celebration animation
+  const frames = [
+`   *       *        *
+      *         *
+  *        *         *`,
+`      *    BOOM    *
+   *       *      *`,
+`   *       *        *
+      *         *
+  *        *         *`
+  ];
+
+  function startParty() {
+    const party = document.getElementById("party");
+    let i = 0;
+    let ticks = 0;
+
+    const interval = setInterval(() => {
+      party.textContent = frames[i % frames.length];
+      i++;
+      ticks++;
+
+      if (ticks > 15) {
+        clearInterval(interval);
+        party.textContent = `
+STREAMERS:
+|||||||||||||||||||||||||
+
+FIREWORKS:
+    *    *    *
+  *    *    *    *
+
+(yes was the correct answer)`;
+      }
+    }, 150);
+  }
 </script>
 
 </body>

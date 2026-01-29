@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Valentine Question</title>
+</head>
+<body style="text-align:center; font-family: Arial; margin-top: 40px;">
+
+    <h2>Will you be my Valentine?</h2>
+    
+    <img src="download.jpeg" width="300"><br><br>
+
+    <button onclick="sayYes()">Yes</button>
+    <button onclick="sayNo()">No</button>
+
+    <p id="message"></p>
+
+<script>
+    let noCount = 0;
+
+    function sayYes() {
+        document.body.innerHTML = `
+            <h1>WOOT WOOT!</h1>
+            <p>You just made me very happy :)</p>
+            <p>Happy Valentine's Day</p>
+        `;
+    }
+
+    function sayNo() {
+        const messages = [
+            "Are you sure?",
+            "Really sure?",
+            "Think again.",
+            "Last chance.",
+            "That doesn't seem right.",
+            "Try clicking yes instead.",
+            "I'm going to ask again."
+        ];
+
+        document.getElementById("message").innerText = messages[noCount % messages.length];
+        noCount++;
+    }
+</script>
+
+</body>
+</html>
